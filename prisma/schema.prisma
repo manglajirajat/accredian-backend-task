@@ -14,10 +14,27 @@ datasource db {
 }
 
 model Referral {
-  id         String   @id @default(uuid())
-  name       String
-  email      String   @unique
-  referralCode String @unique
-  referredBy String?  // Nullable, in case no one referred the user
-  createdAt  DateTime @default(now())
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  referralCode  String   @unique @default(uuid())
+  referredBy    String?
+  p_id          String?
+  reward_earned Int      @default(0)
+  createdAt     DateTime @default(now())
+}
+
+model Program {
+  id             String @id @default(uuid())
+  name           String
+  refereer_bonus Int
+  referee_bonus  Int
+}
+
+model Otp {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  otp       Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
